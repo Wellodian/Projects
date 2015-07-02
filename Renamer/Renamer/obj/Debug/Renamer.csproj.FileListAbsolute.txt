@@ -1,0 +1,9 @@
+c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\bin\Debug\Renamer.exe.config
+c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\bin\Debug\Renamer.exe
+c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\bin\Debug\Renamer.pdb
+c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\Renamer.csprojResolveAssemblyReference.cache
+c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\Renamer.Form1.resources
+c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\Renamer.Properties.Resources.resources
+c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\Renamer.csproj.GenerateResource.Cache
+c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\Renamer.exe
+c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\Renamer.pdb
