@@ -28,31 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1 = new System.Windows.Forms.Panel();
             this.fileList = new System.Windows.Forms.ListView();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnGetSourceDirectory = new System.Windows.Forms.Button();
-            this.txtSourceDirectory = new System.Windows.Forms.TextBox();
-            this.lblSourceDirectory = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.cbxSequentialNumbering = new System.Windows.Forms.CheckBox();
+            this.cbxPrependFolderName = new System.Windows.Forms.CheckBox();
+            this.cbxIncludeSubFolders = new System.Windows.Forms.CheckBox();
             this.btnGetTargetDirectory = new System.Windows.Forms.Button();
             this.txtTargetDirectory = new System.Windows.Forms.TextBox();
             this.lblTargetDirectory = new System.Windows.Forms.Label();
-            this.cbxIncludeSubFolders = new System.Windows.Forms.CheckBox();
-            this.cbxPrependFolderName = new System.Windows.Forms.CheckBox();
-            this.cbxSequentialNumbering = new System.Windows.Forms.CheckBox();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnGetSourceDirectory = new System.Windows.Forms.Button();
+            this.txtSourceDirectory = new System.Windows.Forms.TextBox();
+            this.lblSourceDirectory = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.fileList);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 128);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(756, 579);
+            this.panel1.Size = new System.Drawing.Size(756, 451);
             this.panel1.TabIndex = 4;
             // 
             // fileList
@@ -60,7 +63,7 @@
             this.fileList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileList.Location = new System.Drawing.Point(0, 0);
             this.fileList.Name = "fileList";
-            this.fileList.Size = new System.Drawing.Size(756, 579);
+            this.fileList.Size = new System.Drawing.Size(756, 451);
             this.fileList.TabIndex = 1;
             this.fileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -79,33 +82,58 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(756, 117);
+            this.panel2.Size = new System.Drawing.Size(756, 128);
             this.panel2.TabIndex = 5;
             // 
-            // btnGetSourceDirectory
+            // toolStrip1
             // 
-            this.btnGetSourceDirectory.Location = new System.Drawing.Point(303, 34);
-            this.btnGetSourceDirectory.Name = "btnGetSourceDirectory";
-            this.btnGetSourceDirectory.Size = new System.Drawing.Size(24, 23);
-            this.btnGetSourceDirectory.TabIndex = 6;
-            this.btnGetSourceDirectory.Text = "...";
-            this.btnGetSourceDirectory.UseVisualStyleBackColor = true;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(756, 25);
+            this.toolStrip1.TabIndex = 14;
+            this.toolStrip1.Text = "toolStrip1";
             // 
-            // txtSourceDirectory
+            // toolStripButton1
             // 
-            this.txtSourceDirectory.Location = new System.Drawing.Point(107, 36);
-            this.txtSourceDirectory.Name = "txtSourceDirectory";
-            this.txtSourceDirectory.Size = new System.Drawing.Size(190, 20);
-            this.txtSourceDirectory.TabIndex = 5;
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(60, 22);
+            this.toolStripButton1.Text = "Find Files";
+            this.toolStripButton1.Click += new System.EventHandler(this.btnFindFiles);
             // 
-            // lblSourceDirectory
+            // cbxSequentialNumbering
             // 
-            this.lblSourceDirectory.AutoSize = true;
-            this.lblSourceDirectory.Location = new System.Drawing.Point(12, 39);
-            this.lblSourceDirectory.Name = "lblSourceDirectory";
-            this.lblSourceDirectory.Size = new System.Drawing.Size(89, 13);
-            this.lblSourceDirectory.TabIndex = 4;
-            this.lblSourceDirectory.Text = "Source Directory:";
+            this.cbxSequentialNumbering.AutoSize = true;
+            this.cbxSequentialNumbering.Location = new System.Drawing.Point(352, 78);
+            this.cbxSequentialNumbering.Name = "cbxSequentialNumbering";
+            this.cbxSequentialNumbering.Size = new System.Drawing.Size(130, 17);
+            this.cbxSequentialNumbering.TabIndex = 13;
+            this.cbxSequentialNumbering.Text = "Sequential Numbering";
+            this.cbxSequentialNumbering.UseVisualStyleBackColor = true;
+            // 
+            // cbxPrependFolderName
+            // 
+            this.cbxPrependFolderName.AutoSize = true;
+            this.cbxPrependFolderName.Location = new System.Drawing.Point(352, 55);
+            this.cbxPrependFolderName.Name = "cbxPrependFolderName";
+            this.cbxPrependFolderName.Size = new System.Drawing.Size(129, 17);
+            this.cbxPrependFolderName.TabIndex = 12;
+            this.cbxPrependFolderName.Text = "Prepend Folder Name";
+            this.cbxPrependFolderName.UseVisualStyleBackColor = true;
+            // 
+            // cbxIncludeSubFolders
+            // 
+            this.cbxIncludeSubFolders.AutoSize = true;
+            this.cbxIncludeSubFolders.Location = new System.Drawing.Point(352, 32);
+            this.cbxIncludeSubFolders.Name = "cbxIncludeSubFolders";
+            this.cbxIncludeSubFolders.Size = new System.Drawing.Size(120, 17);
+            this.cbxIncludeSubFolders.TabIndex = 11;
+            this.cbxIncludeSubFolders.Text = "Include Sub-Folders";
+            this.cbxIncludeSubFolders.UseVisualStyleBackColor = true;
             // 
             // btnGetTargetDirectory
             // 
@@ -133,43 +161,30 @@
             this.lblTargetDirectory.TabIndex = 7;
             this.lblTargetDirectory.Text = "Target Directory:";
             // 
-            // cbxIncludeSubFolders
+            // btnGetSourceDirectory
             // 
-            this.cbxIncludeSubFolders.AutoSize = true;
-            this.cbxIncludeSubFolders.Location = new System.Drawing.Point(352, 32);
-            this.cbxIncludeSubFolders.Name = "cbxIncludeSubFolders";
-            this.cbxIncludeSubFolders.Size = new System.Drawing.Size(120, 17);
-            this.cbxIncludeSubFolders.TabIndex = 11;
-            this.cbxIncludeSubFolders.Text = "Include Sub-Folders";
-            this.cbxIncludeSubFolders.UseVisualStyleBackColor = true;
+            this.btnGetSourceDirectory.Location = new System.Drawing.Point(303, 34);
+            this.btnGetSourceDirectory.Name = "btnGetSourceDirectory";
+            this.btnGetSourceDirectory.Size = new System.Drawing.Size(24, 23);
+            this.btnGetSourceDirectory.TabIndex = 6;
+            this.btnGetSourceDirectory.Text = "...";
+            this.btnGetSourceDirectory.UseVisualStyleBackColor = true;
             // 
-            // cbxPrependFolderName
+            // txtSourceDirectory
             // 
-            this.cbxPrependFolderName.AutoSize = true;
-            this.cbxPrependFolderName.Location = new System.Drawing.Point(352, 55);
-            this.cbxPrependFolderName.Name = "cbxPrependFolderName";
-            this.cbxPrependFolderName.Size = new System.Drawing.Size(129, 17);
-            this.cbxPrependFolderName.TabIndex = 12;
-            this.cbxPrependFolderName.Text = "Prepend Folder Name";
-            this.cbxPrependFolderName.UseVisualStyleBackColor = true;
+            this.txtSourceDirectory.Location = new System.Drawing.Point(107, 36);
+            this.txtSourceDirectory.Name = "txtSourceDirectory";
+            this.txtSourceDirectory.Size = new System.Drawing.Size(190, 20);
+            this.txtSourceDirectory.TabIndex = 5;
             // 
-            // cbxSequentialNumbering
+            // lblSourceDirectory
             // 
-            this.cbxSequentialNumbering.AutoSize = true;
-            this.cbxSequentialNumbering.Location = new System.Drawing.Point(352, 78);
-            this.cbxSequentialNumbering.Name = "cbxSequentialNumbering";
-            this.cbxSequentialNumbering.Size = new System.Drawing.Size(130, 17);
-            this.cbxSequentialNumbering.TabIndex = 13;
-            this.cbxSequentialNumbering.Text = "Sequential Numbering";
-            this.cbxSequentialNumbering.UseVisualStyleBackColor = true;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(756, 25);
-            this.toolStrip1.TabIndex = 14;
-            this.toolStrip1.Text = "toolStrip1";
+            this.lblSourceDirectory.AutoSize = true;
+            this.lblSourceDirectory.Location = new System.Drawing.Point(12, 39);
+            this.lblSourceDirectory.Name = "lblSourceDirectory";
+            this.lblSourceDirectory.Size = new System.Drawing.Size(89, 13);
+            this.lblSourceDirectory.TabIndex = 4;
+            this.lblSourceDirectory.Text = "Source Directory:";
             // 
             // Form1
             // 
@@ -183,6 +198,8 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -203,6 +220,7 @@
         private System.Windows.Forms.CheckBox cbxIncludeSubFolders;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.CheckBox cbxSequentialNumbering;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 
