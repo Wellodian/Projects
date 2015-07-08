@@ -7,3 +7,6 @@ c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\
 c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\Renamer.csproj.GenerateResource.Cache
 c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\Renamer.exe
 c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\Renamer.pdb
+C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Renamer\Renamer\bin\Debug\Renamer.exe.config
+C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Renamer\Renamer\obj\Debug\Renamer.exe
+C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Renamer\Renamer\obj\Debug\Renamer.pdb

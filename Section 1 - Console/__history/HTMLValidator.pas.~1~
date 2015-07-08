@@ -1,0 +1,13 @@
+unit HTMLValidator;
+
+interface
+
+implementation
+
+procedure ParseHTML(text: string);
+begin
+
+
+end;
+
+end.
