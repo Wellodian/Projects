@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2015/07/09 11:01:21.072.PAS,C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Question 1 - HTML Parser\SDIMAIN.PAS=C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Question 1 - HTML Parser\HTMLParserForm.PAS</Transaction>
+    <Transaction>2015/07/09 11:01:21.072.dfm,C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Question 1 - HTML Parser\SDIMAIN.dfm=C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Question 1 - HTML Parser\HTMLParserForm.dfm</Transaction>
+    <Transaction>2015/07/09 11:02:54.221.pas,C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Question 1 - HTML Parser\Unit1.pas=C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Question 1 - HTML Parser\HTMLParser.pas</Transaction>
+    <Transaction>2015/07/09 11:04:02.004.dproj,C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Question 1 - HTML Parser\SDIAPP.dproj=C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Question 1 - HTML Parser\HTMLParserAPP.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

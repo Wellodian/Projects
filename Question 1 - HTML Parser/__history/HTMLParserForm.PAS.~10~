@@ -1,0 +1,102 @@
+unit HTMLParserForm;
+
+interface
+
+uses Windows, Classes, Graphics, Forms, Controls, Menus,
+  Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls, ImgList, StdActns,
+  ActnList, ToolWin, HTMLParser;
+
+type
+  TfrmHTMLParserForm = class(TForm)
+    OpenDialog: TOpenDialog;
+    ToolBar1: TToolBar;
+    tbParseText: TToolButton;
+    tbOpenFile: TToolButton;
+    ToolButton3: TToolButton;
+    ActionList1: TActionList;
+    actFileOpen: TAction;
+    actFileExit: TAction;
+    StatusBar: TStatusBar;
+    ImageList1: TImageList;
+    MainMenu1: TMainMenu;
+    mnuFile: TMenuItem;
+    FileExitItem: TMenuItem;
+    gbxTextToParse: TGroupBox;
+    edtTextToParse: TEdit;
+    gbxResult: TGroupBox;
+    edtResult: TEdit;
+    actParseText: TAction;
+    procedure actFileOpenExecute(Sender: TObject);
+    procedure actFileExitExecute(Sender: TObject);
+//    procedure HelpAbout1Execute(Sender: TObject);
+    procedure tbParseTextClick(Sender: TObject);
+    procedure actParseTextExecute(Sender: TObject);
+  private
+    procedure ParseText;
+    procedure ShowError(errorMessage: string);
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmHTMLParserForm: TfrmHTMLParserForm;
+
+implementation
+
+uses about;
+
+{$R *.dfm}
+
+procedure TfrmHTMLParserForm.actFileOpenExecute(Sender: TObject);
+begin
+  OpenDialog.Execute;
+end;
+
+procedure TfrmHTMLParserForm.actParseTextExecute(Sender: TObject);
+begin
+    ParseText;
+end;
+
+procedure TfrmHTMLParserForm.tbParseTextClick(Sender: TObject);
+begin
+    ParseText;
+end;
+
+procedure TfrmHTMLParserForm.ParseText;
+var
+  parser: THTMLParser;
+begin
+
+    parser := THTMLParser.Create;
+    try
+        if not (edtTextToParse.Text = '') then
+        begin
+            parser.ParseText(edtTextToParse.Text);
+        end
+        else
+            ShowError('Please enter some text to parse');
+    finally
+        parser.Free;
+    end;
+end;
+
+procedure TfrmHTMLParserForm.ShowError(errorMessage: string);
+var
+  Dlg: TForm;
+begin
+    Dlg := CreateMessageDialog(errorMessage, mtInformation, [mbOk], mbOK);
+    try
+        Dlg.Caption := 'Text Parser - Information';
+        Dlg.ShowModal;
+    finally
+        Dlg.Free;
+    end;
+end;
+
+procedure TfrmHTMLParserForm.actFileExitExecute(Sender: TObject);
+begin
+  Close;
+end;
+
+end.
