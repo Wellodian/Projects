@@ -1,0 +1,16 @@
+program Sdiapp;
+
+uses
+  Forms,
+  SDIMAIN in 'SDIMAIN.PAS' {frmHTMLParser},
+  ABOUT in 'ABOUT.PAS' {AboutBox};
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TfrmHTMLParser, frmHTMLParser);
+  Application.CreateForm(TAboutBox, AboutBox);
+  Application.Run;
+end.
+ 
