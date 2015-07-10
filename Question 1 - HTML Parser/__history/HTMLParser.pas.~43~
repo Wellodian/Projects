@@ -32,12 +32,9 @@ begin
     slOpenTags := TStringList.Create;
     try
         Parse(sHTMLText, slOpenTags);
-
-
     finally
         slOpenTags.Free;
     end;
-
 end;
 
 procedure THTMLParser.Parse(sHTMLText: string; slOpenTags: TStringList);
@@ -45,6 +42,8 @@ var
     iPos: integer;
     sTag: string;
     sRemainingHTMLText: string;
+const
+    UNEXPECTED_CLOSING_TAG = 'Expected # found </%s>';
 begin
     iPos := Pos('<', sHTMLText);
 
@@ -57,21 +56,21 @@ begin
         begin
             if (slOpenTags.Count = 0) then
             begin
-                sResultText := Format('Expected </%s> found #', [sHTMLText[iPos + 2]]);
-                break;
+                sResultText := Format(UNEXPECTED_CLOSING_TAG, [sHTMLText[iPos + 2]]); //'Expected # found </%s>', [sHTMLText[iPos + 2]]);
+                Exit;
             end
             else
             begin
-                if (SameText(slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2]) = 0) then
+                if (SameText(slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2])) then
                 begin
                     slOpenTags.Delete(slOpenTags.Count-1);
-                    sRemainingHTMLText := Copy(sHTMLText, iPos + 4, Length(sHTMLText) - (iPos + 4));
+                    sRemainingHTMLText := Copy(sHTMLText, iPos + 4, Length(sHTMLText) - (iPos + 3));
                     Parse(sRemainingHTMLText, slOpenTags);
                 end
                 else
                 begin
-                    sResultText := Format('Expected <%s> found </%s>', [slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2]]);
-                    break;
+                    sResultText := Format('Expected </%s> found </%s>', [slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2]]);
+                    Exit;
                 end;
             end;
         end
@@ -80,12 +79,12 @@ begin
         and (sHTMLText[iPos + 2] = '>') then
         begin
             slOpenTags.Add(sHTMLText[iPos + 1]);
-            sRemainingHTMLText := Copy(sHTMLText, iPos + 3, Length(sHTMLText) - (iPos + 3));
+            sRemainingHTMLText := Copy(sHTMLText, iPos + 3, Length(sHTMLText) - (iPos + 2));
             Parse(sRemainingHTMLText, slOpenTags);
         end
         else
         begin
-            sRemainingHTMLText := Copy(sHTMLText, iPos + 1, Length(sHTMLText) - (iPos + 1));
+            sRemainingHTMLText := Copy(sHTMLText, iPos + 1, Length(sHTMLText) - (iPos));
             Parse(sRemainingHTMLText, slOpenTags);
         end;
     end
@@ -94,13 +93,10 @@ begin
         if (slOpenTags.Count = 0) then
             sResultText := 'Correctly tagged paragraph'
         else
-            sResultText := Format('Expected </%s> found #', [slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2]]);
+            sResultText := Format('Expected </%s> found #', [slOpenTags.Strings[slOpenTags.Count-1]]);
     end;
 
 
 end;
-
-
-// ShowMessage(Format('Expected </%s> found #', [sHTMLText[iPos + 2]]));
 
 end.

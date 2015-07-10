@@ -32,19 +32,20 @@ begin
     slOpenTags := TStringList.Create;
     try
         Parse(sHTMLText, slOpenTags);
-
-
     finally
         slOpenTags.Free;
     end;
-
 end;
 
 procedure THTMLParser.Parse(sHTMLText: string; slOpenTags: TStringList);
 var
     iPos: integer;
-    sTag: string;
     sRemainingHTMLText: string;
+const
+    CORRECTLY_TAGGED = 'Correctly tagged paragraph';
+    UNEXPECTED_CLOSING_TAG = 'Expected # found </%s>';
+    INCORRECT_CLOSING_TAG = 'Expected </%s> found </%s>';
+    MISSING_CLOSING_TAG = 'Expected </%s> found #';
 begin
     iPos := Pos('<', sHTMLText);
 
@@ -57,7 +58,7 @@ begin
         begin
             if (slOpenTags.Count = 0) then
             begin
-                sResultText := Format('Expected # found </%s>', [sHTMLText[iPos + 2]]);
+                sResultText := Format(UNEXPECTED_CLOSING_TAG, [sHTMLText[iPos + 2]]); //'Expected # found </%s>', [sHTMLText[iPos + 2]]);
                 Exit;
             end
             else
@@ -70,7 +71,7 @@ begin
                 end
                 else
                 begin
-                    sResultText := Format('Expected </%s> found </%s>', [slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2]]);
+                    sResultText := Format(INCORRECT_CLOSING_TAG, [slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2]]); //'Expected </%s> found </%s>', [slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2]]);
                     Exit;
                 end;
             end;
@@ -92,9 +93,9 @@ begin
     else
     begin
         if (slOpenTags.Count = 0) then
-            sResultText := 'Correctly tagged paragraph'
+            sResultText := CORRECTLY_TAGGED //'Correctly tagged paragraph'
         else
-            sResultText := Format('Expected </%s> found #', [slOpenTags.Strings[slOpenTags.Count-1]]);
+            sResultText := Format(MISSING_CLOSING_TAG, [slOpenTags.Strings[slOpenTags.Count-1]]); //'Expected </%s> found #', [slOpenTags.Strings[slOpenTags.Count-1]]);
     end;
 
 
