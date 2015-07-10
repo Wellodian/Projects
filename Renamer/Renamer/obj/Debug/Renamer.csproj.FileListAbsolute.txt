@@ -7,6 +7,18 @@ c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\
 c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\Renamer.csproj.GenerateResource.Cache
 c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\Renamer.exe
 c:\users\hslmjw\documents\visual studio 2012\Projects\Renamer\Renamer\obj\Debug\Renamer.pdb
+<<<<<<< HEAD
+C:\Users\Matt\Documents\GitHub\Projects\Renamer\Renamer\bin\Debug\Renamer.exe.config
+C:\Users\Matt\Documents\GitHub\Projects\Renamer\Renamer\obj\Debug\Renamer.exe
+C:\Users\Matt\Documents\GitHub\Projects\Renamer\Renamer\obj\Debug\Renamer.pdb
+C:\Users\Matt\Documents\GitHub\Projects\Renamer\Renamer\bin\Debug\Renamer.exe
+C:\Users\Matt\Documents\GitHub\Projects\Renamer\Renamer\bin\Debug\Renamer.pdb
+C:\Users\Matt\Documents\GitHub\Projects\Renamer\Renamer\obj\Debug\Renamer.csprojResolveAssemblyReference.cache
+C:\Users\Matt\Documents\GitHub\Projects\Renamer\Renamer\obj\Debug\Renamer.Form1.resources
+C:\Users\Matt\Documents\GitHub\Projects\Renamer\Renamer\obj\Debug\Renamer.Properties.Resources.resources
+C:\Users\Matt\Documents\GitHub\Projects\Renamer\Renamer\obj\Debug\Renamer.csproj.GenerateResource.Cache
+=======
 C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Renamer\Renamer\bin\Debug\Renamer.exe.config
 C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Renamer\Renamer\obj\Debug\Renamer.exe
 C:\Users\hslmjw\Documents\GitHub\Projects\Projects\Renamer\Renamer\obj\Debug\Renamer.pdb
+>>>>>>> origin/master

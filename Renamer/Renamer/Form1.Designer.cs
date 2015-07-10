@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.fileList = new System.Windows.Forms.ListView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -45,27 +45,31 @@
             this.txtSourceDirectory = new System.Windows.Forms.TextBox();
             this.lblSourceDirectory = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.fileList);
+            this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 128);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(756, 451);
             this.panel1.TabIndex = 4;
             // 
-            // fileList
+            // dataGridView1
             // 
-            this.fileList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileList.Location = new System.Drawing.Point(0, 0);
-            this.fileList.Name = "fileList";
-            this.fileList.Size = new System.Drawing.Size(756, 451);
-            this.fileList.TabIndex = 1;
-            this.fileList.UseCompatibleStateImageBehavior = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(756, 451);
+            this.dataGridView1.TabIndex = 0;
             // 
             // panel2
             // 
@@ -196,6 +200,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -208,7 +213,6 @@
 
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ListView fileList;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnGetTargetDirectory;
         private System.Windows.Forms.TextBox txtTargetDirectory;
@@ -221,6 +225,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.CheckBox cbxSequentialNumbering;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

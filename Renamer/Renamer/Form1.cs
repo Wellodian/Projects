@@ -9,11 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Renamer
 {
     public partial class Form1 : Form
     {
-        string[] filesToUpdate;
+        List<FileDetails> filesToUpdate;
 
         public Form1()
         {
@@ -59,7 +60,9 @@ namespace Renamer
         {
             if (ValidateSourceAndTarget())
             {
+                filesToUpdate = new List<FileDetails>();
                 FindFiles(txtSourceDirectory.Text);
+                dataGridView1.DataSource = filesToUpdate; //.Select(x => new { fileName = x}).ToList();
             }
             else
             {
@@ -76,13 +79,10 @@ namespace Renamer
 
             string[] subDirectories = Directory.GetDirectories(sourceDirectory);
 
-            string[] files = Directory.GetFiles(currentDirectory);
-            if ((files != null) && (files.Length > 0))
+            foreach (var fileName in Directory.GetFiles(currentDirectory))
             {
-                foreach (string fileName in files)
-                {
-                    fileList.Items.Add(fileName);
-                }
+                if (!String.IsNullOrEmpty(fileName))
+                filesToUpdate.Add(new FileDetails(Path.GetDirectoryName(fileName), Path.GetFileName(fileName)));
             }
 
             if (includeSubFolders)
