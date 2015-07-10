@@ -55,8 +55,6 @@ begin
 end;
 
 procedure THTMLParser.Parse(HTMLText: string; slOpenTags: TStringList);
-// Recursive procedure to determine if a string is well formed,
-// based on the rules provided in the question.
 var
     iPos: integer;
 const

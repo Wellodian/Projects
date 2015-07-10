@@ -11,6 +11,8 @@ type
             sResultText: string;
             sHTMLText: string;
             procedure Parse(sHTMLText: string; slOpenTags: TStringList);
+            function IsClosingTag(tagPosition: integer): boolean;
+            function IsOpeningTag(tagPosition: integer): boolean;
         public
             constructor Create(text: string);
             procedure ParseText;
@@ -37,10 +39,24 @@ begin
     end;
 end;
 
+function THTMLParser.IsClosingTag(tagPosition: integer): boolean;
+begin
+    Result := (sHTMLText[tagPosition] = '<')
+        and (sHTMLText[tagPosition + 1] = '/')
+        and (sHTMLText[tagPosition + 2] in ['A'..'Z'])
+        and (sHTMLText[tagPosition + 3] = '>');
+end;
+
+function THTMLParser.IsOpeningTag(tagPosition: integer): boolean;
+begin
+    Result := (sHTMLText[tagPosition] = '<')
+        and (sHTMLText[tagPosition + 2] in ['A'..'Z'])
+        and (sHTMLText[tagPosition + 3] = '>');
+end;
+
 procedure THTMLParser.Parse(sHTMLText: string; slOpenTags: TStringList);
 var
     iPos: integer;
-    sTag: string;
     sRemainingHTMLText: string;
 const
     CORRECTLY_TAGGED = 'Correctly tagged paragraph';
@@ -53,13 +69,11 @@ begin
     if (iPos > 0) then
     begin
         // check if closing tag
-        if (sHTMLText[iPos + 1] = '/')
-        and (sHTMLText[iPos + 2] in ['A'..'Z'])
-        and (sHTMLText[iPos + 3] = '>') then
+        if (IsClosingTag(iPos)) then
         begin
             if (slOpenTags.Count = 0) then
             begin
-                sResultText := Format(UNEXPECTED_CLOSING_TAG, [sHTMLText[iPos + 2]]); //'Expected # found </%s>', [sHTMLText[iPos + 2]]);
+                ResultText := Format(UNEXPECTED_CLOSING_TAG, [sHTMLText[iPos + 2]]);
                 Exit;
             end
             else
@@ -72,14 +86,13 @@ begin
                 end
                 else
                 begin
-                    sResultText := Format(INCORRECT_CLOSING_TAG, [slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2]]); //'Expected </%s> found </%s>', [slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2]]);
+                    ResultText := Format(INCORRECT_CLOSING_TAG, [slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2]]);
                     Exit;
                 end;
             end;
         end
         // check if opening tag
-        else if (sHTMLText[iPos + 1] in ['A'..'Z'])
-        and (sHTMLText[iPos + 2] = '>') then
+        else if (IsOpeningTag(iPos)) then
         begin
             slOpenTags.Add(sHTMLText[iPos + 1]);
             sRemainingHTMLText := Copy(sHTMLText, iPos + 3, Length(sHTMLText) - (iPos + 2));
@@ -94,12 +107,10 @@ begin
     else
     begin
         if (slOpenTags.Count = 0) then
-            sResultText := CORRECTLY_TAGGED //'Correctly tagged paragraph'
+            sResultText := CORRECTLY_TAGGED
         else
-            sResultText := Format(MISSING_CLOSING_TAG, [slOpenTags.Strings[slOpenTags.Count-1]]); //'Expected </%s> found #', [slOpenTags.Strings[slOpenTags.Count-1]]);
+            sResultText := Format(MISSING_CLOSING_TAG, [slOpenTags.Strings[slOpenTags.Count-1]]);
     end;
-
-
 end;
 
 end.

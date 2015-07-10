@@ -10,7 +10,7 @@ type
         private
             sResultText: string;
             sHTMLText: string;
-            procedure Parse(HTMLText: string; slOpenTags: TStringList);
+            procedure Parse(sHTMLText: string; slOpenTags: TStringList);
             function IsClosingTag(tagPosition: integer): boolean;
             function IsOpeningTag(tagPosition: integer): boolean;
         public
@@ -55,8 +55,6 @@ begin
 end;
 
 procedure THTMLParser.Parse(HTMLText: string; slOpenTags: TStringList);
-// Recursive procedure to determine if a string is well formed,
-// based on the rules provided in the question.
 var
     iPos: integer;
 const
