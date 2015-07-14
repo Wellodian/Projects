@@ -8,15 +8,15 @@ uses
 type
     THTMLParser = class
         private
-            sResultText: string;
+            FResultText: string;
             sHTMLText: string;
-            procedure Parse(sHTMLText: string; slOpenTags: TStringList);
+            procedure Parse(HTMLText: string; slOpenTags: TStringList);
             function IsClosingTag(tagPosition: integer): boolean;
             function IsOpeningTag(tagPosition: integer): boolean;
         public
             constructor Create(text: string);
             procedure ParseText;
-            property ResultText: string read sResultText write sResultText;
+            property ResultText: string read FResultText write FResultText;
     end;
 
 implementation
@@ -54,7 +54,9 @@ begin
         and (sHTMLText[tagPosition + 2] = '>');
 end;
 
-procedure THTMLParser.Parse(sHTMLText: string; slOpenTags: TStringList);
+procedure THTMLParser.Parse(HTMLText: string; slOpenTags: TStringList);
+// Recursive procedure to determine if a string is well formed,
+// based on the rules provided in the question.
 var
     iPos: integer;
 const
@@ -64,7 +66,7 @@ const
     MISSING_CLOSING_TAG = 'Expected </%s> found #';
 begin
     // find position of first potential HTML tag in text param
-    iPos := Pos('<', sHTMLText);
+    iPos := Pos('<', HTMLText);
 
     if (iPos > 0) then
     begin
@@ -81,7 +83,7 @@ begin
                 if (SameText(slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2])) then
                 begin
                     slOpenTags.Delete(slOpenTags.Count-1);
-                    sHTMLText := Copy(sHTMLText, iPos + 4, Length(sHTMLText) - (iPos + 3));
+                    sHTMLText := Copy(HTMLText, iPos + 4, Length(sHTMLText) - (iPos + 3));
                     Parse(sHTMLText, slOpenTags);
                 end
                 else
@@ -95,12 +97,12 @@ begin
         else if (IsOpeningTag(iPos)) then
         begin
             slOpenTags.Add(sHTMLText[iPos + 1]);
-            sHTMLText := Copy(sHTMLText, iPos + 3, Length(sHTMLText) - (iPos + 2));
+            sHTMLText := Copy(HTMLText, iPos + 3, Length(sHTMLText) - (iPos + 2));
             Parse(sHTMLText, slOpenTags);
         end
         else
         begin
-            sHTMLText := Copy(sHTMLText, iPos + 1, Length(sHTMLText) - (iPos));
+            sHTMLText := Copy(HTMLText, iPos + 1, Length(sHTMLText) - (iPos));
             Parse(sHTMLText, slOpenTags);
         end;
     end

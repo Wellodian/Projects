@@ -8,15 +8,15 @@ uses
 type
     THTMLParser = class
         private
-            sResultText: string;
-            sHTMLText: string;
+            FResultText: string;
+            FHTMLText: string;
             procedure Parse(sHTMLText: string; slOpenTags: TStringList);
             function IsClosingTag(tagPosition: integer): boolean;
             function IsOpeningTag(tagPosition: integer): boolean;
         public
             constructor Create(text: string);
             procedure ParseText;
-            property ResultText: string read sResultText write sResultText;
+            property ResultText: string read FResultText;
     end;
 
 implementation
@@ -24,7 +24,7 @@ implementation
 constructor THTMLParser.Create(text: string);
 begin
     inherited Create;
-    sHTMLText := text;
+    FHTMLText := text;
 end;
 
 procedure THTMLParser.ParseText;
@@ -33,7 +33,7 @@ var
 begin
     slOpenTags := TStringList.Create;
     try
-        Parse(sHTMLText, slOpenTags);
+        Parse(FHTMLText, slOpenTags);
     finally
         slOpenTags.Free;
     end;
@@ -41,23 +41,24 @@ end;
 
 function THTMLParser.IsClosingTag(tagPosition: integer): boolean;
 begin
-    Result := (sHTMLText[tagPosition] = '<')
-        and (sHTMLText[tagPosition + 1] = '/')
-        and (sHTMLText[tagPosition + 2] in ['A'..'Z'])
-        and (sHTMLText[tagPosition + 3] = '>');
+    Result := (FHTMLText[tagPosition] = '<')
+        and (FHTMLText[tagPosition + 1] = '/')
+        and (FHTMLText[tagPosition + 2] in ['A'..'Z'])
+        and (FHTMLText[tagPosition + 3] = '>');
 end;
 
 function THTMLParser.IsOpeningTag(tagPosition: integer): boolean;
 begin
-    Result := (sHTMLText[tagPosition] = '<')
-        and (sHTMLText[tagPosition + 1] in ['A'..'Z'])
-        and (sHTMLText[tagPosition + 2] = '>');
+    Result := (FHTMLText[tagPosition] = '<')
+        and (FHTMLText[tagPosition + 1] in ['A'..'Z'])
+        and (FHTMLText[tagPosition + 2] = '>');
 end;
 
 procedure THTMLParser.Parse(sHTMLText: string; slOpenTags: TStringList);
+// Recursive procedure to determine if a string is well formed,
+// based on the rules provided in the question.
 var
     iPos: integer;
-    sRemainingHTMLText: string;
 const
     CORRECTLY_TAGGED = 'Correctly tagged paragraph';
     UNEXPECTED_CLOSING_TAG = 'Expected # found </%s>';
@@ -72,45 +73,50 @@ begin
         // check if closing tag
         if (IsClosingTag(iPos)) then
         begin
+            // if no open tags are outstanding, then it's an unexpected closing tag
             if (slOpenTags.Count = 0) then
             begin
-                ResultText := Format(UNEXPECTED_CLOSING_TAG, [sHTMLText[iPos + 2]]);
+                FResultText := Format(UNEXPECTED_CLOSING_TAG, [sHTMLText[iPos + 2]]);
                 Exit;
             end
             else
             begin
+                // if open tags are waiting for a matching closing tag, then check for a match
+                // if matched, then remove matching opening tag from slOpenTags string list
+                // otherwise, exit with result text that the incorrect closing tag was encountered.
                 if (SameText(slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2])) then
                 begin
                     slOpenTags.Delete(slOpenTags.Count-1);
-                    sRemainingHTMLText := Copy(sHTMLText, iPos + 4, Length(sHTMLText) - (iPos + 3));
-                    Parse(sRemainingHTMLText, slOpenTags);
+                    FHTMLText := Copy(sHTMLText, iPos + 4, Length(sHTMLText) - (iPos + 3));
+                    Parse(FHTMLText, slOpenTags);
                 end
                 else
                 begin
-                    ResultText := Format(INCORRECT_CLOSING_TAG, [slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2]]);
+                    FResultText := Format(INCORRECT_CLOSING_TAG, [slOpenTags.Strings[slOpenTags.Count-1], sHTMLText[iPos + 2]]);
                     Exit;
                 end;
             end;
         end
-        // check if opening tag
+        // if opening tag, then add to open tags string list
+        // otherwise, move forward in the HTML text and recursively Parse the text
         else if (IsOpeningTag(iPos)) then
         begin
             slOpenTags.Add(sHTMLText[iPos + 1]);
-            sHTMLText := Copy(sHTMLText, iPos + 3, Length(sHTMLText) - (iPos + 2));
-            Parse(sHTMLText, slOpenTags);
+            FHTMLText := Copy(sHTMLText, iPos + 3, Length(sHTMLText) - (iPos + 2));
+            Parse(FHTMLText, slOpenTags);
         end
         else
         begin
-            sRemainingHTMLText := Copy(sHTMLText, iPos + 1, Length(sHTMLText) - (iPos));
-            Parse(sRemainingHTMLText, slOpenTags);
+            FHTMLText := Copy(sHTMLText, iPos + 1, Length(sHTMLText) - (iPos));
+            Parse(FHTMLText, slOpenTags);
         end;
     end
     else
     begin
         if (slOpenTags.Count = 0) then
-            ResultText := CORRECTLY_TAGGED
+            FResultText := CORRECTLY_TAGGED
         else
-            ResultText := Format(MISSING_CLOSING_TAG, [slOpenTags.Strings[slOpenTags.Count-1]]);
+            FResultText := Format(MISSING_CLOSING_TAG, [slOpenTags.Strings[slOpenTags.Count-1]]);
     end;
 end;
 
